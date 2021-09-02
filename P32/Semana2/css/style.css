@@ -1,4 +1,16 @@
-p {
-    color: red;
+h1 {
+    font-size: 30px;
+    color:chartreuse;
+}
+
+.p-azul {
+    color: blue;
     text-align: center;
 }
+
+.p-verde {
+    color:firebrick;
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
