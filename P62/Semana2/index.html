@@ -33,7 +33,7 @@
         <hr>
 
         <h2>Qué podemos hacer con JavaScript?</h2>
-        <p>JavaScript puede cambiar los atributos en HTML.</p>
+        <p id="demo">JavaScript puede cambiar los atributos en HTML.</p>
         <p>En este ejemplo cambiamos el valor de src en img, teniendo en la
         misma carpeta 2 imagenes, un zapato rojo y un zapato negro</p>
         <button
@@ -43,6 +43,27 @@
         <button
             onclick="document.getElementById('myImage').src='img/zapatoNegro.png'">Zapato Negro
         </button>
+
+        <!-- Ocultar -->
+        <button
+            onclick="document.getElementById('demo').style.display='none'">Oculta!
+        </button>
+        <!-- Mostrar -->
+        <button
+            onclick="document.getElementById('demo').style.display='block'">Muestra!
+        </button>
+
+        <hr>
+        <h2>JavaScript en el body</h2>
+        <p id="demo1">Párrafo</p>
+        <button onclick="myFunction()">Clic para cambiar el párrafo</button>
+        <script>
+            function myFunction() {
+                document.getElementById("demo1").innerHTML = "Párrafo cambiado.";
+            }
+        </script>
+        <br>
+        <br>
 
     </body>
 </html>
