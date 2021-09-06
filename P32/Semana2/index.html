@@ -40,16 +40,24 @@
 
         <h2>Qué podemos hacer con JavaScript?</h2>
         <p>JavaScript puede cambiar los atributos en HTML.</p>
-        <p>En este ejemplo cambiamos el valor de src en img, teniendo en la
+        <p id="demo">En este ejemplo cambiamos el valor de src en img, teniendo en la
         misma carpeta 2 imagenes, un zapato rojo y un zapato negro</p>
         <button
-        onclick="document.getElementById('myImage').src='zapatoRojo.png'">Zapato rojo
+        onclick="document.getElementById('myImage').src='img/zapatoRojo.png'">Zapato rojo
         </button>
-        <img id="myImage" src="zapatoRojo.png" style="width:100px">
+        <img id="myImage" src="img/zapatoRojo.png" style="width:100px">
         <button
-        onclick="document.getElementById('myImage').src='zapatoNegro.png'">Zapato negro
+        onclick="document.getElementById('myImage').src='img/zapatoNegro.png'">Zapato negro
         </button>
         <br>
         <br>
+        <!-- Ocultar -->
+        <button
+        onclick="document.getElementById('demo').style.display='none'">Oculta!
+        </button>
+        <!-- Mostrar -->
+        <button
+        onclick="document.getElementById('demo').style.display='block'">Muestra!
+        </button>
 </body>
 </html>
