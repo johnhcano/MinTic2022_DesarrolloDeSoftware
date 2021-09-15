@@ -1,28 +1,23 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <calculadora-basica />
-  </div>
+  <v-app>
+    <v-main> 
+      <calculadora-basica />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import CalculadoraBasica from './components/CalculadoraBasica.vue'
+import CalculadoraBasica from './components/CalculadoraBasica.vue';
 
 export default {
-  name: 'App',
-  components: {
-    CalculadoraBasica    
-  }
-}
-</script>
+  name: "App",
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    CalculadoraBasica,
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
