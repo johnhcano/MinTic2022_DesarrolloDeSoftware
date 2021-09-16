@@ -6,8 +6,20 @@
     <br />
     <input type="number" v-model="n2" />
     <br />
-    <button @click="suma()">Sumar</button>
-    <button @click="resta()">Restar</button>
+    <v-btn
+      color="primary"
+      elevation="15"
+      rounded
+      x-large
+      @click="suma()"
+    >Sumar</v-btn>
+    <v-btn
+      color="primary"
+      elevation="15"
+      rounded
+      x-large
+      @click="resta()"
+    >Restar</v-btn>
     <br />
     {{ resp }}
   </div>
