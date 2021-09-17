@@ -25,7 +25,7 @@
       </v-col>
     </v-row>
     <br />
-    <v-row>
+    <v-row class="text-center">
       <v-col>
         <v-btn
           color="primary"
