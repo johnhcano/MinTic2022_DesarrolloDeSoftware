@@ -1,37 +1,67 @@
 <template>
-  <div>
-    <h1>Calculadora Básica</h1>
-    <v-text-field
-      type="number"
-      label="Número 1"
-      :rules="rules"
-      hide-details="auto"
-      v-model="n1"
-    ></v-text-field>
-    
-    <v-text-field
-      label="Número 2"
-      :rules="rules"
-      hide-details="auto"
-      v-model="n2"
-    ></v-text-field>
-    
-    <v-btn
-      color="primary"
-      elevation="18"
-      rounded
-      @click="suma()"
-    >Sumar</v-btn>
-    
-    <v-btn
-      color="primary"
-      elevation="18"
-      rounded
-      @click="resta()"
-    >Restar</v-btn>
+  <v-container>
+    <v-row>
+      <v-col>
+        <h1 class="text-center">Calculadora Básica</h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-text-field
+          type="number"
+          label="Número 1"
+          :rules="rules"
+          hide-details="auto"
+          v-model="n1"
+        ></v-text-field>
+      </v-col>
+      <v-col>  
+        <v-text-field
+          label="Número 2"
+          :rules="rules"
+          hide-details="auto"
+          v-model="n2"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <br />
+    <v-row>
+      <v-col>
+        <v-btn
+          color="primary"
+          elevation="18"
+          rounded
+          @click="sumar()"
+        >Sumar</v-btn>
+      </v-col>
+      <v-col>  
+        <v-btn
+          color="primary"
+          elevation="18"
+          rounded
+          @click="restar()"
+        >Restar</v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+          color="primary"
+          elevation="18"
+          rounded
+          @click="multiplicar()"
+        >Multiplicar</v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+          color="primary"
+          elevation="18"
+          rounded
+          @click="dividir()"
+        >Dividir</v-btn>
+      </v-col>
+    </v-row>
     <br />
     <span>{{ resultado }}</span>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -45,22 +75,25 @@ export default {
       rules: [
         value => !!value || 'Requerido.',
         value => (value && value.length >= 3) || 'Min 3 caracteres',
-        //validar que sea solo número.
-        /*<v-text-field type="number" :rules="numberRule"></v-text-field>
-
-numberRule: (v) => {
-   v => !!v || 'campo requerido',
-   v => Number(v) > 0 || 'valor tiene que ser mayor a 0',
-},*/
       ],
     };
   },
   methods: {
-    suma() {
+    sumar() {
       this.resultado = parseFloat(this.n1) + parseFloat(this.n2);
     },
-    resta() {
+    restar() {
       this.resultado = parseFloat(this.n1) - parseFloat(this.n2);
+    },
+    multiplicar() {
+      this.resultado = parseFloat(this.n1) * parseFloat(this.n2);
+    },
+    dividir() {
+      if (this.n2 == 0) {
+        alert("No es un número");
+      } else {
+        this.resultado = parseFloat(this.n1) / parseFloat(this.n2);
+      }
     },
   },
 };
