@@ -1,9 +1,8 @@
 <template>
-  <!--<div class="about">
-    <h1>This is an about page</h1>  
-  
-  </div>-->
-  <calculadora-basica />
+  <div class="about">
+    <h1>This is an about page</h1> 
+    <calculadora-basica />
+  </div>
 </template>
 
 <script>
