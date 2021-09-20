@@ -34,7 +34,7 @@
             elevation="13" 
             rounded 
             small
-            @click="suma()"
+            @click="sumar()"
         >Sumar</v-btn>
       </v-col>
       <v-col>
@@ -43,7 +43,7 @@
             elevation="13" 
             rounded 
             small
-            @click="resta()"
+            @click="restar()"
         >Restar</v-btn>
       </v-col>
       <v-col>
@@ -52,6 +52,7 @@
             elevation="13" 
             rounded 
             small
+            @click="multiplicar()"
         >Multiplicar</v-btn>
       </v-col>
       <v-col>
@@ -60,6 +61,7 @@
             elevation="13" 
             rounded 
             small
+            @click="dividir()"
         >Dividir</v-btn>
       </v-col>
     </v-row>
@@ -88,11 +90,22 @@ export default {
     };
   },
   methods: {
-    suma() {
+    sumar() {
       this.respuesta = parseInt(this.n1) + parseInt(this.n2);
     },
-    resta() {
+    restar() {
       this.respuesta = parseInt(this.n1) - parseInt(this.n2);
+    },
+    multiplicar() {
+      this.respuesta = parseInt(this.n1) * parseInt(this.n2);
+    },
+    dividir() {
+      if(this.n2 == 0){
+        alert("No es un número");
+      }else{
+        this.respuesta = parseInt(this.n1) / parseInt(this.n2);
+      }
+      
     },
   },
 };
