@@ -1,0 +1,18 @@
+//----------------- Inicializar el propyecto
+npm init -y
+
+//--------------- Instalar express
+npm install express
+
+//--------------- Instalar nodemon
+npm install nodemon
+
+//Luego se crea dentro de la carpeta backend_nodejs la carpeta "src"
+// y dentro de la carpeta "src" se crean: 1 archivo (index.js)
+// y dos carpetas. (controllers y routers)
+
+//Para que la carpeta (node_modules) no se cargue en el github,
+// se debe crear el archivo ".gitignore" dentro de backend_nodejs.
+// lo que debe contener el .gitignore es una línea con node_modules
+ 
+
