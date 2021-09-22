@@ -1,5 +1,5 @@
 <template>
-  <h2>Personajes</h2>
+  <h2>Personajes Futurama</h2>
 </template>
 
 <script>
