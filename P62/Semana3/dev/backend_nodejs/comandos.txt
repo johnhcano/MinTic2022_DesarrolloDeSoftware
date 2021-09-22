@@ -6,3 +6,8 @@ npm install express
 
 //------ Instalar nodemon
 npm install nodemon
+
+//Ejecutar/Iniciar el servidor
+node src/index.js
+
+abrir el navegador y digitar -> localhost:3000
