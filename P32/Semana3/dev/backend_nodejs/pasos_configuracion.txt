@@ -1,0 +1,21 @@
+############# Pasos para configuración del backend ###############
+
+1. Crear una carpeta dentro de "dev" llamada "backend_nodejs"
+
+2. Ubicarnos dentro de la carpeta "backend_nodejs" en el terminal o cmd
+
+3. Se crea con "npm init -y" el package.json que permite instalar las dependencias
+
+4. Instalar express (Framework para NodeJS) --> npm install express
+
+5. Se crea dentro de la carpeta "backend_nodejs" el archivo .gitignore que contiene
+en la primera línea --> node_modules
+
+6. Instalar nodemon --> npm install -g nodemon
+
+7. Se crea una carpeta "src" dentro de "backend_nodejs", que contendrá 1 archivo 
+   index.js y dos carpetas con los siguientes nombres:
+   - controllers
+   - routers
+
+8. 
