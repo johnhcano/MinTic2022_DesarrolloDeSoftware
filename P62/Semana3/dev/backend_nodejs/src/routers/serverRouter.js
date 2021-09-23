@@ -12,7 +12,8 @@ class ServerRouter{
         this.router.get("/users", objServerC.getAllUsers);
         this.router.get("/users/:id", objServerC.getUsers);
         this.router.post("/users", objServerC.register);
-        //this.router.put("/users", objServerC.update);
+        this.router.put("/users", objServerC.update);
+        this.router.delete("/users", objServerC.deleteUser);        
     }
 }
 
