@@ -18,4 +18,15 @@ en la primera línea --> node_modules
    - controllers
    - routers
 
-8. 
+8. Con el fin de cambiar el comando de ejecución de nuestro servidor 
+   "node src/index.js o nodemon src/index.js" en el archivo package.json
+   se agrega a los scripts la siguiente información:
+
+   "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+   }
+
+   Con el fin de poder ejecutar con el comando "npm run ..."
+
+   "npm run start" ó "npm run dev"
