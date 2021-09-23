@@ -5,9 +5,18 @@ npm init -y
 npm install express
 
 //------ Instalar nodemon
-npm install nodemon
+npm install -g nodemon
 
 //Ejecutar/Iniciar el servidor
 node src/index.js
 
 abrir el navegador y digitar -> localhost:3000
+
+
+//abrir package.json y en la sección de Sripts agregar:
+"scripts: {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+}
+
+Luego se puede utilizar el comando "npm run start" o "npm run dev"
