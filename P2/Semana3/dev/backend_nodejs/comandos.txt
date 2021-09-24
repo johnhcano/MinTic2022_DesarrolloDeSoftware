@@ -5,7 +5,7 @@ npm init -y
 npm install express
 
 //--------------- Instalar nodemon
-npm install nodemon
+npm install -g nodemon
 
 //Luego se crea dentro de la carpeta backend_nodejs la carpeta "src"
 // y dentro de la carpeta "src" se crean: 1 archivo (index.js)
@@ -16,3 +16,16 @@ npm install nodemon
 // lo que debe contener el .gitignore es una línea con node_modules
  
 
+###################
+--códigos de respuesta 
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+##### Modificación del package.json para que los comandos se
+    puedan ejecutar con "npm run .."
+
+    "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+    },
+
+    --> npm run start ó npm run dev

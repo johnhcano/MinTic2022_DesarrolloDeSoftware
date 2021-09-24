@@ -30,3 +30,8 @@ en la primera línea --> node_modules
    Con el fin de poder ejecutar con el comando "npm run ..."
 
    "npm run start" ó "npm run dev"
+
+   
+###############################################
+Códigos de respuesta
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
