@@ -75,7 +75,7 @@ class ServerController{
         }    
     }
 
-    getAllUsers(req, res) {
+    getAllUsers(req, res) { //req: request, res: response
         res.status(200).json(users);
     }
 }
