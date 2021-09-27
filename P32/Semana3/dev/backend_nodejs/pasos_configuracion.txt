@@ -31,6 +31,9 @@ en la primera línea --> node_modules
 
    "npm run start" ó "npm run dev"
 
+9. Instalar Mongoose
+
+npm install mongoose
    
 ###############################################
 Códigos de respuesta
