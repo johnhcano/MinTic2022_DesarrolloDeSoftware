@@ -29,3 +29,11 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
     },
 
     --> npm run start ó npm run dev
+
+-------------MongoDB Compass----------------
+//Herramienta para viasualizar de manera gráfica las bases
+  de datos que tengamos en MongoDB
+  https://www.mongodb.com/try/download/compass
+
+-------- Instalar Mongoose --------
+npm install mongoose
