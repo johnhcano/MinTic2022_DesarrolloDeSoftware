@@ -15,7 +15,6 @@ class ServerController {
     register(req, res) {
         person.create(req.body, (error, data) => {
             if (error) {
-                //next(error);
                 res.status(500).send();
             } else {
                 res.status(201).json(data);
