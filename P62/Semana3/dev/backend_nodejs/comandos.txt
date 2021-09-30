@@ -23,3 +23,6 @@ Luego se puede utilizar el comando "npm run start" o "npm run dev"
 
 -----------INSTALAR MONGOOSE-------------
 npm install mongoose
+
+-----------Instalar CORS------------------
+npm install cors

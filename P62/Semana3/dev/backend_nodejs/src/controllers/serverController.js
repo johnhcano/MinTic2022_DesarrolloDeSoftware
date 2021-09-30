@@ -53,7 +53,7 @@ class ServerController {
 
     update(req, res) {
         let { id, nombre, apellido, edad, email } = req.body;
-        let obj = { nombre, apellido, edad, email }
+        let obj = { nombre, apellido, edad, email };
         person.findByIdAndUpdate(id, { $set: obj }, (error, data) => {
             if (error) {
                 res.status(500).send();
