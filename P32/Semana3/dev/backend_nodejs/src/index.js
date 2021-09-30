@@ -1,11 +1,12 @@
 //Importar express
 const express = require('express');
 const serverRouter = require('./routers/serverRouter');
-const cors = require('cors');
 //Importar mongoose
 const mongoose = require('mongoose');
 //Importar url de conexión a la BD
 const database = require('./database/db');
+//Importar cors
+const cors = require('cors');
 
 class Server {
     //constructor

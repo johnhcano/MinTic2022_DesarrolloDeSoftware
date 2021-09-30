@@ -35,6 +35,10 @@ en la primera línea --> node_modules
 
 npm install mongoose
    
+10. Instalar cors
+
+npm install cors
+
 ###############################################
 Códigos de respuesta
 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
