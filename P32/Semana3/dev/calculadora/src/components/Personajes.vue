@@ -8,6 +8,14 @@
         {{ item.Name }} - {{ item.Planet}} - {{ item.Status }}
       </li>
 -->
+    <form>
+      <input type="text" v-model="nombre">
+      <input type="text" v-model="apellido">
+      <input type="text" v-model="edad">
+      <input type="text" v-model="email">
+    </form>
+    <button @click="crearPersonaje()">Agregar</button>
+    <br>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -16,14 +24,18 @@
             <th class="text-left">Apellido</th>
             <th class="text-left">Edad</th>
             <th class="text-left">Email</th>
+            <th class="text-left">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in personajes" :key="item.id">
+          <tr v-for="item in personajes" :key="item._id">
             <td>{{ item.nombre }}</td>
             <td>{{ item.apellido }}</td>
             <td>{{ item.edad }}</td>
             <td>{{ item.email }}</td>
+            <td>
+              <button @click="eliminarPersonaje(item._id)">Eliminar</button>
+            </td>
           </tr>
         </tbody>
       </template>
@@ -36,9 +48,31 @@ import store from "../store/index.js";
 
 export default {
   data: () => {
-    return {};
+    return {
+      nombre: null,
+      apellido: null,
+      edad: null,
+      email: null
+    };
   },
-  methods: {},
+  methods: {
+    eliminarPersonaje(id) {
+      let obj = { id };
+      store.dispatch("deletePersonajes", obj).then(() => {
+        store.dispatch("getPersonajes");
+      });
+    },
+    crearPersonaje(){
+      let obj = { nombre:this.nombre, apellido:this.apellido, edad:this.edad, email:this.email }
+      store.dispatch("setPersonajes", obj).then(() => {
+        store.dispatch("getPersonajes");
+        this.nombre = null;
+        this.apellido = null;
+        this.edad = null;
+        this.email = null;
+      })
+    }
+  },
   created: () => {
     //Acceder a las actions del store
     store.dispatch("getPersonajes");
