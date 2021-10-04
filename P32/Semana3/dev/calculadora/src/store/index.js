@@ -22,7 +22,7 @@ export default new Vuex.Store({
       commit('setPersonajes', data);
     },
     //Agregar Personajes
-    async setPersonajes({commit}, personajes) {
+    async setPersonajes({ commit }, personajes) {
       const peticion = await fetch('http://localhost:3000/users', {
         method: 'POST',
         headers: {
@@ -32,7 +32,7 @@ export default new Vuex.Store({
       });      
     },
     //Eliminar Personajes
-    async deletePersonajes({commit}, personajes) {
+    async deletePersonajes({ commit }, personajes) {
       const peticion = await fetch('http://localhost:3000/users', {
         method: 'DELETE',
         headers: {

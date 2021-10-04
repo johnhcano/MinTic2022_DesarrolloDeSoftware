@@ -8,14 +8,7 @@
         {{ item.Name }} - {{ item.Planet}} - {{ item.Status }}
       </li>
 -->
-    <form>
-      <input type="text" v-model="nombre">
-      <input type="text" v-model="apellido">
-      <input type="text" v-model="edad">
-      <input type="text" v-model="email">
-    </form>
-    <button @click="crearPersonaje()">Agregar</button>
-    <br>
+    <br />
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -34,7 +27,7 @@
             <td>{{ item.edad }}</td>
             <td>{{ item.email }}</td>
             <td>
-              <button @click="eliminarPersonaje(item._id)">Eliminar</button>
+              <v-btn color="error" elevation="8" rounded small @click="eliminarPersonaje(item._id)">Eliminar</v-btn>
             </td>
           </tr>
         </tbody>
@@ -52,7 +45,7 @@ export default {
       nombre: null,
       apellido: null,
       edad: null,
-      email: null
+      email: null,
     };
   },
   methods: {
@@ -62,16 +55,21 @@ export default {
         store.dispatch("getPersonajes");
       });
     },
-    crearPersonaje(){
-      let obj = { nombre:this.nombre, apellido:this.apellido, edad:this.edad, email:this.email }
+    crearPersonaje() {
+      let obj = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad,
+        email: this.email,
+      };
       store.dispatch("setPersonajes", obj).then(() => {
         store.dispatch("getPersonajes");
         this.nombre = null;
         this.apellido = null;
         this.edad = null;
         this.email = null;
-      })
-    }
+      });
+    },
   },
   created: () => {
     //Acceder a las actions del store
