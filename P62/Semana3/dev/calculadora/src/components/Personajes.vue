@@ -2,8 +2,8 @@
   <div>
     <h1>Personajes</h1>
     <ul>
-      <li v-for="item in personajes" :key="item.id"> <!--item.Name-->
-          {{ item.nombre }} {{ item.apellido }} - Edad:{{ item.edad }}
+      <li v-for="item in personajes" :key="item._id"> <!--item.Name-->
+          {{ item.nombre }} {{ item.apellido }} - Edad:{{ item.edad }} - {{item.email}}
           <!--{{ item.Name }} - {{ item.Age }}-->
       </li>
     </ul>
