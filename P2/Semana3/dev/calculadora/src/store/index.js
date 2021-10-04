@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    personajes: []
+    personajes: [],
+    users: []
   },
   mutations: {
     setPersonajes(state, payload) {
       state.personajes = payload
+    },
+    setUsers(state, payload){
+      state.users = payload;
     }
   },
   actions: {  
@@ -18,6 +22,12 @@ export default new Vuex.Store({
       const data = await peticion.json();
       console.log(data);
       commit('setPersonajes', data);
+    },
+    async getUsers({commit}){
+      const peticion = await fetch('http://localhost:3000/users');
+      const data = await peticion.json();
+      console.log(data);
+      commit('setUsers', data);
     }
   },
   modules: {

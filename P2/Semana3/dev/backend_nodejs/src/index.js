@@ -5,6 +5,8 @@ const serverRouter = require('./routers/serverRouter');
 const mongoose = require('mongoose');
 //Importar url de conexión a la BD
 const database = require('./database/db');
+//Importar cors
+const cors = require('cors');
 
 class Server{
     //constructor
@@ -15,6 +17,7 @@ class Server{
         this.app.set('port', process.env.PORT || 3000);
         //Indicar que las solicitudes http se trabajará en JSON
         this.app.use(express.json());
+        this.app.use(cors());
         /**
          * 
          * ******************Rutas**********************

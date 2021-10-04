@@ -37,3 +37,6 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
 -------- Instalar Mongoose --------
 npm install mongoose
+
+-------- Instalar Cors ----------
+npm install cors

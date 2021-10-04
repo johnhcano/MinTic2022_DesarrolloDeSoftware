@@ -6,6 +6,11 @@
               {{ item.Name }} - {{ item.Planet }}
           </li>
       </ul>
+      <ul>
+          <li v-for="usuario in users" :key="usuario._id">
+              {{usuario.nombre}} {{usuario.apellido}} {{usuario.edad}} {{usuario.email}}
+          </li>
+      </ul>
   </div>
 </template>
 
@@ -20,10 +25,14 @@ export default {
     created: () => {
         //accede a las acciones del store
         store.dispatch("getPersonajes");
+        store.dispatch("getUsers");
     },
     computed: {
         personajes: () => {
             return store.state.personajes;
+        },
+        users: () => {
+            return store.state.users;
         }
     }
 }
