@@ -8,8 +8,60 @@
     </ul>
 
     <hr />
+    <br />
 
-    <v-simple-table dark>
+    <!--------- Inicio Formulario ---->
+
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <v-text-field
+        v-model="nombre"
+        :counter="10"
+        :rules="nombreRules"
+        label="Nombre"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="apellido"
+        :counter="10"
+        :rules="apellidoRules"
+        label="Apellido"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="edad"
+        :rules="edadRules"
+        label="edad"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="email"
+        :rules="emailRules"
+        label="E-mail"
+        required
+      ></v-text-field>
+
+      <v-checkbox
+        v-model="checkbox"
+        :rules="[(v) => !!v || 'You must agree to continue!']"
+        label="Do you agree?"
+        required
+      ></v-checkbox>
+
+      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
+        Validate
+      </v-btn>
+
+      <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
+
+      <v-btn color="warning" @click="resetValidation"> Reset Validation </v-btn>
+    </v-form>
+
+    <!--------- Fin Formulario ------>
+
+    <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>
@@ -27,10 +79,18 @@
             <td>{{ usuario.edad }}</td>
             <td>{{ usuario.email }}</td>
             <td>
-                <v-btn color="primary" elevation="2" rounded small>Eliminar</v-btn> 
-                <v-btn color="primary" elevation="2" rounded small>Actualizar</v-btn>
+              <v-btn
+                @click="eliminarUsuario(usuario._id)"
+                color="error"
+                elevation="2"
+                rounded
+                small
+                >Eliminar</v-btn
+              >
+              <v-btn color="primary" elevation="2" rounded small
+                >Actualizar</v-btn
+              >
             </td>
-
           </tr>
         </tbody>
       </template>
@@ -68,10 +128,45 @@
 import store from "../store/index.js";
 
 export default {
-  data: () => {
-    return {};
+  data: () => ({
+    valid: true,
+    nombre: "",
+    nombreRules: [
+      (v) => !!v || "Nombre es obligatorio",
+      (v) => (v && v.length <= 10) || "Nombre debe ser menor a 10 caracteres",
+    ],
+    apellido: "",
+    apellidoRules: [
+      (v) => !!v || "Apellido es obligatorio",
+      (v) => (v && v.length <= 10) || "Apellido debe ser menor a 10 caracteres",
+    ],
+    email: "",
+    emailRules: [
+      (v) => !!v || "E-mail es obligatorio",
+      (v) => /.+@.+\..+/.test(v) || "E-mail debe ser válido",
+    ],
+    edad: "",
+    edadRules: [(v) => !!v || "edad es obligatorio"],
+    checkbox: false,
+    return: {},
+  }),
+  methods: {
+    eliminarUsuario(id) {
+      let obj = { id };
+      store.dispatch("deleteUsers", obj).then(() => {
+        store.dispatch("getUsers");
+      });
+    },
+    validate() {
+      this.$refs.form.validate();
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
+    },
   },
-  methods: {},
   created: () => {
     //accede a las acciones del store
     store.dispatch("getPersonajes");

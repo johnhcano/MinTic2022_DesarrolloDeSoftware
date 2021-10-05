@@ -28,6 +28,15 @@ export default new Vuex.Store({
       const data = await peticion.json();
       console.log(data);
       commit('setUsers', data);
+    },
+    async deleteUsers({commit}, users){
+      const peticion = await fetch('http://localhost:3000/users', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(users)
+      });
     }
   },
   modules: {
