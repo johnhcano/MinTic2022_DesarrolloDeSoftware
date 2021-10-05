@@ -1,12 +1,33 @@
 <template>
   <div>
-    <h1>Personajes</h1>
-    <ul>
-      <li v-for="item in personajes" :key="item._id"> <!--item.Name-->
-          {{ item.nombre }} {{ item.apellido }} - Edad:{{ item.edad }} - {{item.email}}
-          <!--{{ item.Name }} - {{ item.Age }}-->
-      </li>
-    </ul>
+    <h1>Mejores Delanteros del Fútbol Internacional</h1>
+    <br />
+    <!-- Inicio Tabla con los jugadores (Personajes) -->
+    <v-simple-table>
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Apellido</th>
+            <th class="text-center">Edad</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in personajes" :key="item._id">
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.apellido }}</td>
+            <td>{{ item.edad }}</td>
+            <td>{{ item.email }}</td>
+            <td>
+              <v-btn color="error" elevation="12" rounded x-small>Eliminar</v-btn>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+    <!-- Fin tabla jugadores -->
   </div>
 </template>
 
@@ -14,20 +35,19 @@
 import store from "../store/index.js";
 
 export default {
-    data: () => {
-        return {};
+  data: () => {
+    return {};
+  },
+  methods: {},
+  created: () => {
+    //accede a las acciones del store
+    store.dispatch("getPersonajes");
+  },
+  computed: {
+    personajes: () => {
+      return store.state.personajes;
     },
-    methods: {},
-    created: () => {
-        //accede a las acciones del store
-        store.dispatch("getPersonajes");
-    },
-    computed: {
-        personajes: () => {
-            return store.state.personajes;
-        }
-    }
-
+  },
 };
 </script>
 
