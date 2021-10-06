@@ -21,7 +21,7 @@
             <td>{{ item.edad }}</td>
             <td>{{ item.email }}</td>
             <td>
-              <v-btn color="error" elevation="12" rounded x-small>Eliminar</v-btn>
+              <v-btn @click="eliminarPersonaje(item._id)" color="error" elevation="12" rounded x-small>Eliminar</v-btn>
             </td>
           </tr>
         </tbody>
@@ -38,9 +38,19 @@ export default {
   data: () => {
     return {};
   },
-  methods: {},
+  methods: {
+    eliminarPersonaje(id){
+      let obj = { id };
+      store.dispatch("deletePersonajes", obj).then(()=>{
+        store.dispatch("getPersonajes");
+      });
+    },
+    insertarPersonaje(){
+
+    }
+  },
   created: () => {
-    //accede a las acciones del store
+    //dispatch: accede a las acciones del store
     store.dispatch("getPersonajes");
   },
   computed: {

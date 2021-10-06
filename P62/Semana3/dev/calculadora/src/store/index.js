@@ -19,6 +19,15 @@ export default new Vuex.Store({
       const data = await peticion.json();
       console.log(data);
       commit('setPersonajes', data);
+    },
+    async deletePersonajes({commit}, personajes){
+      const peticion = await fetch('http://localhost:3000/users', {
+        method: 'DELETE',
+        headers: { 
+          'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(personajes)
+      });
     }
   },
   modules: {
