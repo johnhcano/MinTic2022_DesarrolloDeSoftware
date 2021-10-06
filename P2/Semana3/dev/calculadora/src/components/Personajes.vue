@@ -1,17 +1,19 @@
 <template>
   <div>
     <h1>Personajes</h1>
+
+    <!--------- Inicio API Futurama ---->    
     <ul>
       <li v-for="item in personajes" :key="item.Name">
         {{ item.Name }} - {{ item.Planet }}
       </li>
     </ul>
+    <!--------- Fin API Futurama ---->    
 
     <hr />
     <br />
 
-    <!--------- Inicio Formulario ---->
-
+    <!--------- Inicio Formulario Insertar Documento---->
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="nombre"
@@ -33,6 +35,7 @@
         v-model="edad"
         :rules="edadRules"
         label="edad"
+        type="number"
         required
       ></v-text-field>
 
@@ -50,6 +53,8 @@
         required
       ></v-checkbox>
 
+      <v-btn color="primary" class="mr-4" @click="insertarUsuario()">Agregar</v-btn>
+
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
         Validate
       </v-btn>
@@ -58,9 +63,9 @@
 
       <v-btn color="warning" @click="resetValidation"> Reset Validation </v-btn>
     </v-form>
-
-    <!--------- Fin Formulario ------>
-
+    <!--------- Fin Formulario Insertar Documento------>
+    <br />
+    <!--------- Inicio Tabla Documentos------>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -95,9 +100,12 @@
         </tbody>
       </template>
     </v-simple-table>
+    <!--------- Fin Tabla Documentos ------>
 
     <hr />
     <br />
+
+    <!--------- Inicio Tarjetas con los jugadores------>
     <v-card
       v-for="usuario in users"
       :key="usuario._id"
@@ -121,6 +129,7 @@
         <v-btn outlined rounded text> Button </v-btn>
       </v-card-actions>
     </v-card>
+    <!--------- Fin Tarjetas con los jugadores------>
   </div>
 </template>
 
@@ -148,7 +157,12 @@ export default {
     edad: "",
     edadRules: [(v) => !!v || "edad es obligatorio"],
     checkbox: false,
-    return: {},
+    return: {
+      nombre: null,
+      apellido: null,
+      edad: null,
+      email: null
+    },
   }),
   methods: {
     eliminarUsuario(id) {
@@ -156,6 +170,19 @@ export default {
       store.dispatch("deleteUsers", obj).then(() => {
         store.dispatch("getUsers");
       });
+    },
+    insertarUsuario(){
+      let obj = { nombre: this.nombre, 
+                  apellido: this.apellido, 
+                  edad: this.edad, 
+                  email: this.email };
+      store.dispatch("setUsers", obj).then(() => {
+        store.dispatch("getUsers");
+      });
+      this.nombre = "";
+      this.apellido = "";
+      this.edad = "";
+      this.email = "";
     },
     validate() {
       this.$refs.form.validate();
