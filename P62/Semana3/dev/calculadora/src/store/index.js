@@ -13,6 +13,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    //Obtener/Consultar personajes
     async getPersonajes({commit}){
       //const peticion = await fetch('https://futuramaapi.herokuapp.com/api/v2/characters');
       const peticion = await fetch('http://localhost:3000/users');
@@ -20,6 +21,7 @@ export default new Vuex.Store({
       console.log(data);
       commit('setPersonajes', data);
     },
+    //Eliminar personaje mediante su id
     async deletePersonajes({commit}, personajes){
       const peticion = await fetch('http://localhost:3000/users', {
         method: 'DELETE',
@@ -28,7 +30,17 @@ export default new Vuex.Store({
         },
         body: JSON.stringify(personajes)
       });
-    }
+    },
+    //Agregar Personajes
+    async setPersonajes({ commit }, personajes) {
+      const peticion = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(personajes)
+      });      
+    },
   },
   modules: {
   }
