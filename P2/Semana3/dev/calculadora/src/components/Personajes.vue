@@ -21,7 +21,7 @@
         :rules="nombreRules"
         label="Nombre"
         required
-      ></v-text-field>
+      >{{ nombre }}</v-text-field>
 
       <v-text-field
         v-model="apellido"
