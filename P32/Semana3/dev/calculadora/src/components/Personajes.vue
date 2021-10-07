@@ -34,6 +34,7 @@
         :counter="10"
         :rules="edadRules"
         label="Edad"
+        type="number"
         required
       ></v-text-field>
 
@@ -51,7 +52,11 @@
         required
       ></v-checkbox>
 
-      <v-btn rounded x-small color="primary" class="mr-4" @click="crearPersonaje">Agregar</v-btn>
+      <v-btn v-if="id==null" rounded x-small color="primary" class="mr-4" @click="crearPersonaje">Agregar</v-btn>
+
+      <v-btn v-if="id!=null" rounded x-small color="primary" class="mr-4" @click="actualizarPersonaje(id)">Actualizar</v-btn>
+
+      <v-btn v-if="id!=null" rounded x-small color="error" class="mr-4" @click="btnCancelar">Cancelar</v-btn>
 
       <v-btn rounded x-small :disabled="!valid" color="success" class="mr-4" @click="validate">Validate</v-btn>
 
@@ -85,11 +90,21 @@
               <v-btn
                 color="error"
                 elevation="8"
+                class="mr-4"
                 rounded
                 x-small
                 @click="eliminarPersonaje(item._id)"
-                >Eliminar</v-btn
-              >
+                >Eliminar
+              </v-btn>
+              <v-btn
+                color="primary"
+                elevation="8"
+                class="mr-4"
+                rounded
+                x-small
+                v-on:click="btnActualizar(item._id, item.nombre, item.apellido, item.edad, item.email)"
+                >Actualizar
+              </v-btn>
             </td>
           </tr>
         </tbody>
@@ -118,7 +133,7 @@ export default {
     edad: "",
     edadRules: [
       (v) => !!v || "Edad es obligatorio",
-      (v) => (v && v.length <= 3) || "Edad debe tener menos de 3 caracteres",
+      (v) => (v > 0) || "El número debe ser mayor que cero",
     ],
     email: "",
     emailRules: [
@@ -126,6 +141,7 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "Email debe ser válido",
     ],
     checkbox: false,
+    id: null,
   }),
   methods: {
     eliminarPersonaje(id) {
@@ -145,6 +161,31 @@ export default {
         store.dispatch("getPersonajes");
         this.$refs.form.reset();
       });
+    },
+    actualizarPersonaje(id) {
+      let obj = {
+        id: id,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad,
+        email: this.email,
+      };
+      store.dispatch("updatePersonajes", obj).then(() => {
+        store.dispatch("getPersonajes");
+        this.$refs.form.reset();
+        this.id = null;
+      });
+    },
+    btnActualizar(id, nombre, apellido, edad, email){
+      this.id = id;
+      this.nombre = nombre;
+      this.apellido = apellido;
+      this.edad = edad;
+      this.email = email;
+    },
+    btnCancelar(){
+      this.$refs.form.reset();
+      this.id = null;
     },
     validate() {
       this.$refs.form.validate();
