@@ -46,7 +46,17 @@ export default new Vuex.Store({
         },
         body: JSON.stringify(users)
       });
+    },
+    async updateUsers({commit}, users){
+      const peticion = await fetch('http://localhost:3000/users', {
+        method: 'PUT',
+        headers: {
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(users)
+      });
     }
+
   },
   modules: {
   }

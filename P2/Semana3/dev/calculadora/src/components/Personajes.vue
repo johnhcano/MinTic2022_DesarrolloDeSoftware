@@ -21,7 +21,7 @@
         :rules="nombreRules"
         label="Nombre"
         required
-      >{{ nombre }}</v-text-field>
+      ></v-text-field>
 
       <v-text-field
         v-model="apellido"
@@ -53,7 +53,7 @@
         required
       ></v-checkbox>
 
-      <v-btn color="primary" class="mr-4" @click="insertarUsuario()">Agregar</v-btn>
+      <v-btn v-if="id==null" color="primary" class="mr-4" @click="insertarUsuario()">Agregar</v-btn>
 
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
         Validate
@@ -61,7 +61,11 @@
 
       <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
 
-      <v-btn color="warning" @click="resetValidation"> Reset Validation </v-btn>
+      <v-btn color="warning" class="mr-4" @click="resetValidation"> Reset Validation </v-btn>
+
+      <v-btn v-if="id!=null" color="primary" class="mr-4" @click="actualizarUsuario(id)"> Actualizar </v-btn>
+
+      <v-btn v-if="id!=null" color="error" class="mr-4" v-on:click="btnCancelar"> Cancelar </v-btn>
     </v-form>
     <!--------- Fin Formulario Insertar Documento------>
     <br />
@@ -92,7 +96,7 @@
                 small
                 >Eliminar</v-btn
               >
-              <v-btn color="primary" elevation="2" rounded small
+              <v-btn @click="btnActualizar(usuario._id,usuario.nombre,usuario.apellido,usuario.edad,usuario.email)" color="primary" elevation="2" rounded small
                 >Actualizar</v-btn
               >
             </td>
@@ -157,12 +161,7 @@ export default {
     edad: "",
     edadRules: [(v) => !!v || "edad es obligatorio"],
     checkbox: false,
-    return: {
-      nombre: null,
-      apellido: null,
-      edad: null,
-      email: null
-    },
+    id: null,
   }),
   methods: {
     eliminarUsuario(id) {
@@ -183,6 +182,29 @@ export default {
       this.apellido = "";
       this.edad = "";
       this.email = "";
+    },
+    actualizarUsuario(id){
+      let obj = { id: id,
+                  nombre: this.nombre, 
+                  apellido: this.apellido, 
+                  edad: this.edad, 
+                  email: this.email };
+      store.dispatch("updateUsers", obj).then(() => {
+        store.dispatch("getUsers");
+        this.id = null;
+      });
+      this.$refs.form.reset();
+    },
+    btnActualizar(id, nombre, apellido, edad, email){
+      this.id = id;
+      this.nombre = nombre; 
+      this.apellido = apellido; 
+      this.edad = edad; 
+      this.email = email;
+    },
+    btnCancelar(){
+      this.id = null;
+      this.$refs.form.reset();
     },
     validate() {
       this.$refs.form.validate();
