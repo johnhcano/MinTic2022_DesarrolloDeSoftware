@@ -2,6 +2,7 @@
   <div>
     <h1>Mejores Delanteros del Fútbol Internacional</h1>
     <br />
+
     <!-- Inicio formulario para crear los jugadores -->
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
@@ -42,7 +43,15 @@
         required
       ></v-checkbox>
 
-      <v-btn x-small color="primary" class="mr-4" @click="crearPersonaje()">Agregar</v-btn>
+      <v-btn v-if="id==null" x-small color="primary" class="mr-4" @click="crearPersonaje()"
+        >Agregar</v-btn
+      >
+      <v-btn v-if="id!=null" x-small color="primary" class="mr-4" @click="actualizarPersonaje(id)"
+        >Actualizar</v-btn
+      >
+      <v-btn v-if="id!=null" x-small color="error" class="mr-4" v-on:click="btnCancelar"
+        >Cancelar</v-btn
+      >
       <v-btn
         :disabled="!valid"
         color="success"
@@ -62,7 +71,9 @@
       </v-btn>
     </v-form>
     <!-- Fin formulario creación de jugadores -->
+
     <br />
+
     <!-- Inicio Tabla con los jugadores (Personajes) -->
     <v-simple-table>
       <template v-slot:default>
@@ -88,7 +99,17 @@
                 elevation="12"
                 rounded
                 x-small
+                class="mr-4"
                 >Eliminar</v-btn
+              >
+              <v-btn
+                @click="btnActualizar(item._id, item.nombre, item.apellido, item.edad, item.email)"
+                color="primary"
+                elevation="12"
+                rounded
+                x-small
+                class="mr-4"
+                >Actualizar</v-btn
               >
             </td>
           </tr>
@@ -125,12 +146,7 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "E-mail debe ser válido",
     ],
     checkbox: false,
-    return: {
-      nombre: null,
-      apellido: null,
-      edad: null,
-      email: null,
-    },
+    id: null,
   }),
   methods: {
     eliminarPersonaje(id) {
@@ -148,11 +164,33 @@ export default {
       };
       store.dispatch("setPersonajes", obj).then(() => {
         store.dispatch("getPersonajes");
-        this.nombre = "";
-        this.apellido = "";
-        this.edad = "";
-        this.email = "";
+        this.$refs.form.reset();
       });
+    },
+    actualizarPersonaje(id) {
+      let obj = {
+        id: id,
+        nombre: this.nombre,
+        apellido: this.apellido,
+        edad: this.edad,
+        email: this.email,
+      };
+      store.dispatch("updatePersonajes", obj).then(() => {
+        store.dispatch("getPersonajes");
+        this.$refs.form.reset();
+        this.id = null;
+      });
+    },
+    btnActualizar(id, nombre, apellido, edad, email){
+      this.id = id;
+      this.nombre = nombre;
+      this.apellido = apellido;
+      this.edad = edad;
+      this.email = email;
+    },
+    btnCancelar(){
+      this.id = null;
+      this.$refs.form.reset();
     },
     validate() {
       this.$refs.form.validate();

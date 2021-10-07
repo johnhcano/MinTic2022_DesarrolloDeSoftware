@@ -8,13 +8,13 @@ export default new Vuex.Store({
     personajes: []
   },
   mutations: {
-    setPersonajes(state, payload){
+    setPersonajes(state, payload) {
       state.personajes = payload;
     }
   },
   actions: {
     //Obtener/Consultar personajes
-    async getPersonajes({commit}){
+    async getPersonajes({ commit }) {
       //const peticion = await fetch('https://futuramaapi.herokuapp.com/api/v2/characters');
       const peticion = await fetch('http://localhost:3000/users');
       const data = await peticion.json();
@@ -22,11 +22,11 @@ export default new Vuex.Store({
       commit('setPersonajes', data);
     },
     //Eliminar personaje mediante su id
-    async deletePersonajes({commit}, personajes){
+    async deletePersonajes({ commit }, personajes) {
       const peticion = await fetch('http://localhost:3000/users', {
         method: 'DELETE',
-        headers: { 
-          'Content-Type' : 'application/json'
+        headers: {
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(personajes)
       });
@@ -39,8 +39,19 @@ export default new Vuex.Store({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(personajes)
-      });      
+      });
     },
+    //Actualizar Personajes
+    async updatePersonajes({ commit }, personajes) {
+      const peticion = await fetch('http://localhost:3000/users', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(personajes)
+      });
+    },
+
   },
   modules: {
   }
