@@ -29,7 +29,7 @@ export default new Vuex.Store({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(personajes)
-      });      
+      });
     },
     //Eliminar Personajes
     async deletePersonajes({ commit }, personajes) {
@@ -39,7 +39,17 @@ export default new Vuex.Store({
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(personajes)
-      });      
+      });
+    },
+    //Actualizar Personajes
+    async updatePersonajes({ commit }, personajes) {
+      const peticion = await fetch('http://localhost:3000/users', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(personajes)
+      });
     }
   },
   modules: {
