@@ -55,6 +55,12 @@
 
       <v-btn v-if="id==null" color="primary" class="mr-4" @click="insertarUsuario()">Agregar</v-btn>
 
+      <v-btn v-if="id!=null" color="primary" class="mr-4" disabled>Agregar</v-btn>
+
+      <v-btn v-if="id!=null" color="primary" class="mr-4" @click="actualizarUsuario(id)"> Actualizar </v-btn>
+
+      <v-btn v-if="id!=null" color="error" class="mr-4" v-on:click="btnCancelar"> Cancelar </v-btn>
+
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
         Validate
       </v-btn>
@@ -63,9 +69,6 @@
 
       <v-btn color="warning" class="mr-4" @click="resetValidation"> Reset Validation </v-btn>
 
-      <v-btn v-if="id!=null" color="primary" class="mr-4" @click="actualizarUsuario(id)"> Actualizar </v-btn>
-
-      <v-btn v-if="id!=null" color="error" class="mr-4" v-on:click="btnCancelar"> Cancelar </v-btn>
     </v-form>
     <!--------- Fin Formulario Insertar Documento------>
     <br />
@@ -178,10 +181,7 @@ export default {
       store.dispatch("setUsers", obj).then(() => {
         store.dispatch("getUsers");
       });
-      this.nombre = "";
-      this.apellido = "";
-      this.edad = "";
-      this.email = "";
+      this.$refs.form.reset();
     },
     actualizarUsuario(id){
       let obj = { id: id,
